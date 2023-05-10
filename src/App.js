@@ -101,14 +101,11 @@ class App extends Component {
 
   getSearchResults = () => {
     const {searchInput, displayList} = this.state
-    let searchResults
-    if (searchInput === '') {
-      searchResults = displayList
-    } else {
-      searchResults = displayList.filter(eachItem =>
-        eachItem.includes(searchInput.toLowerCase()),
+   
+     const searchResults = displayList.filter(eachItem =>
+        eachItem.name.toLowerCase().includes(searchInput.toLowerCase()),
       )
-    }
+    
     return searchResults
   }
 
@@ -117,7 +114,7 @@ class App extends Component {
   renderDisplayResults = searchList => (
     <ul className="songs-playlist">
       {searchList.map(eachItem => (
-        <DisplayPlaylist key={eachItem.name} songDetails={eachItem} />
+        <DisplayPlaylist key={eachItem.name} songDetails={eachItem} onDeleteSong={this.onDeleteSong} />
       ))}
     </ul>
   )
